@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Clientes {
-    public static void main(String[] args) {
+    public void MenuClientes() {
         MetodoCLientes m = new MetodoCLientes();
         Scanner sc = new Scanner(System.in);
         LinkedList<ObjClientes> l = new LinkedList<ObjClientes>();
@@ -37,8 +37,7 @@ public class Clientes {
                     break;
 
                 default:
-                    System.out.println("Opcion invalida");
-                    break;
+                    System.out.println("ingrese una opcion valida");
             }
         }
     }
