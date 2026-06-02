@@ -7,6 +7,7 @@ public class MetodoCLientes {
 
   public LinkedList<ObjClientes> AgregarCliente(LinkedList<ObjClientes> listaClientes) {
     ObjClientes o = new ObjClientes();
+    System.out.println("Ingrese la cedula del cliente: ");
     String cedula = va.leerCedula(sc);
     for (ObjClientes c : listaClientes) {
       if (c.getCedula().equals(cedula)) {
@@ -28,9 +29,13 @@ public class MetodoCLientes {
 
   public LinkedList<ObjClientes> ModificarCliente(LinkedList<ObjClientes> l) {
     System.out.println("Ingrese la cedula del cliente a modificar: ");
-    String cedula = sc.nextLine();
+    String cedula = sc.nextLine().trim();
+    boolean encontrado = false;
+
     for (ObjClientes o : l) {
-      if (o.getCedula().equals(cedula)) {
+      if (o.getCedula().equalsIgnoreCase(cedula)) {
+        encontrado = true;
+        System.out.println("Cliente encontrado. Ingrese los nuevos datos:");
         System.out.println("Ingrese el nombre del cliente: ");
         o.setNombre(va.leerNombre(sc));
         System.out.println("Ingrese el apellido del cliente: ");
@@ -41,32 +46,46 @@ public class MetodoCLientes {
         o.setDireccion(va.leerDireccion(sc));
         System.out.println("Ingrese la licencia de conduccion del cliente: ");
         o.setLicenciaConduccion(va.leerLicencia(sc));
-      } else {
-        System.out.println("Cliente no encontrado");
+        System.out.println("Cliente modificado exitosamente.");
+        break;
       }
+    }
+
+    if (!encontrado) {
+      System.out.println("Cliente no encontrado.");
     }
     return l;
   }
 
   public LinkedList<ObjClientes> EliminarCliente(LinkedList<ObjClientes> l) {
     System.out.println("Ingrese la cedula del cliente a eliminar: ");
-    String cedula = sc.nextLine();
+    String cedula = sc.nextLine().trim();
+    boolean encontrado = false;
+
     for (ObjClientes o : l) {
-      if (o.getCedula().equals(cedula)) {
+      if (o.getCedula().equalsIgnoreCase(cedula)) {
         l.remove(o);
+        encontrado = true;
+        System.out.println("Cliente eliminado exitosamente.");
         break;
-      } else {
-        System.out.println("Cliente no encontrado");
       }
+    }
+
+    if (!encontrado) {
+      System.out.println("Cliente no encontrado.");
     }
     return l;
   }
 
   public void BuscarCliente(LinkedList<ObjClientes> l) {
     System.out.println("Ingrese la cedula del cliente a buscar: ");
-    String cedula = sc.nextLine();
+    String cedula = sc.nextLine().trim();
+    boolean encontrado = false; // Bandera de control
+
     for (ObjClientes o : l) {
-      if (o.getCedula().equals(cedula)) {
+      if (o.getCedula().equalsIgnoreCase(cedula)) {
+        encontrado = true;
+        System.out.println("\n========================================");
         System.out.println("Cliente encontrado: ");
         System.out.println("Cedula: " + o.getCedula());
         System.out.println("Nombre: " + o.getNombre());
@@ -74,9 +93,13 @@ public class MetodoCLientes {
         System.out.println("Telefono: " + o.getTelefono());
         System.out.println("Direccion: " + o.getDireccion());
         System.out.println("Licencia de conduccion: " + o.getLicenciaConduccion());
-      } else {
-        System.out.println("Cliente no encontrado");
+        System.out.println("========================================");
+        break;
       }
+    }
+
+    if (!encontrado) {
+      System.out.println("Cliente no encontrado.");
     }
   }
 

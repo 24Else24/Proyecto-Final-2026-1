@@ -5,5 +5,23 @@ FechaInicio: 20/02/2025
 FechaFin: 22/02/2025
 Dias: 2
 TotalPagar: 50.0
-Estado: 1
+Estado: 0
+------------------------------------------------------
+IdContrato: CON-1780365366256
+Cedula: 1011512001
+Placa: ABC123
+FechaInicio: 05/02/2025
+FechaFin: 06/02/2025
+Dias: 1
+TotalPagar: 100.0
+Estado: 0
+------------------------------------------------------
+IdContrato: CON-1780366406454
+Cedula: 1011512001
+Placa: DRX120
+FechaInicio: 01/02/2024
+FechaFin: 02/02/2024
+Dias: 1
+TotalPagar: 150000.0
+Estado: 0
 ------------------------------------------------------

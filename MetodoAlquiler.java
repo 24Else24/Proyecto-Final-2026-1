@@ -71,24 +71,28 @@ public class MetodoAlquiler {
     public LinkedList<ObjAlquiler> DevolverAlquiler(LinkedList<ObjAlquiler> la, LinkedList<ObjVehiculos> lv) {
         System.out.println("Ingrese la placa del vehiculo a devolver: ");
         String placa = va.leerPlaca(sc);
-        boolean alquilerEncontrado = false;
+        boolean encontrado = false;
 
         for (ObjAlquiler a : la) {
-            if (a.getPlacaVehiculo().equals(placa) && a.isEstado()) {
-                a.setEstado(false);
-                alquilerEncontrado = true;
+            // Validación ignorando mayúsculas/minúsculas
+            if (a.getPlacaVehiculo().equalsIgnoreCase(placa) && a.isEstado()) {
+                a.setEstado(false); // Finaliza el contrato
+                encontrado = true;
+
+                // Cambiar el estado del vehículo de nuevo a disponible (true)
                 for (ObjVehiculos v : lv) {
-                    if (v.getPlaca().equals(placa)) {
+                    if (v.getPlaca().equalsIgnoreCase(placa)) {
                         v.setEstado(true);
                         break;
                     }
                 }
-                System.out.println("Alquiler devuelto exitosamente.");
+                System.out.println("Vehiculo devuelto con éxito. Contrato finalizado.");
                 break;
             }
         }
-        if (!alquilerEncontrado) {
-            System.out.println("Error: alquiler no encontrado o ya devuelto.");
+
+        if (!encontrado) {
+            System.out.println("Error: No se encontro un alquiler activo para la placa ingresada.");
         }
         return la;
     }
@@ -99,7 +103,7 @@ public class MetodoAlquiler {
         boolean encontrado = false;
 
         for (ObjAlquiler a : la) {
-            if (a.getPlacaVehiculo().equals(placa) && a.isEstado()) {
+            if (a.getPlacaVehiculo().equalsIgnoreCase(placa) && a.isEstado()) {
                 encontrado = true;
                 System.out.println("Alquiler encontrado.");
                 System.out.println("1. Modificar fecha de inicio");
@@ -108,35 +112,41 @@ public class MetodoAlquiler {
                 System.out.println("Seleccione una opcion: ");
                 String opcion = sc.nextLine().trim();
 
+                String tempInicio = a.getFechaInicio();
+                String tempFin = a.getFechaFin();
+
                 switch (opcion) {
                     case "1":
                         System.out.println("Ingrese la nueva fecha de inicio (DD/MM/AAAA): ");
-                        a.setFechaInicio(va.leerFecha(sc));
+                        tempInicio = va.leerFecha(sc);
                         break;
                     case "2":
                         System.out.println("Ingrese la nueva fecha de fin (DD/MM/AAAA): ");
-                        a.setFechaFin(va.leerFecha(sc));
+                        tempFin = va.leerFecha(sc);
                         break;
                     case "3":
                         System.out.println("Ingrese la nueva fecha de inicio (DD/MM/AAAA): ");
-                        a.setFechaInicio(va.leerFecha(sc));
+                        tempInicio = va.leerFecha(sc);
                         System.out.println("Ingrese la nueva fecha de fin (DD/MM/AAAA): ");
-                        a.setFechaFin(va.leerFecha(sc));
+                        tempFin = va.leerFecha(sc);
                         break;
                     default:
                         System.out.println("Opcion invalida, no se realizo ninguna modificacion.");
                         return la;
                 }
 
-                int nuevosDias = va.calcularDias(a.getFechaInicio(), a.getFechaFin());
+                int nuevosDias = va.calcularDias(tempInicio, tempFin);
                 if (nuevosDias < 0) {
                     System.out.println("Error: fechas invalidas, no se guardo la modificacion.");
                     return la;
                 }
 
+                a.setFechaInicio(tempInicio);
+                a.setFechaFin(tempFin);
                 a.setDiasAlquiler(nuevosDias);
+
                 for (ObjVehiculos v : lv) {
-                    if (v.getPlaca().equals(placa)) {
+                    if (v.getPlaca().equalsIgnoreCase(placa)) {
                         a.setTotalPagar(nuevosDias * v.getPrecioDiario());
                         break;
                     }
@@ -156,18 +166,24 @@ public class MetodoAlquiler {
     }
 
     public void BuscarAlquiler(LinkedList<ObjAlquiler> la) {
-        System.out.println("Ingrese el numero del contrato a buscar: ");
+        System.out.println("Ingrese el numero del contrato a buscar (ej: 17112233 o CON-17112233): ");
         String numero = sc.nextLine().trim();
+
+        if (numero.isEmpty()) {
+            System.out.println("Error: El campo de busqueda no puede estar vacio.");
+            return;
+        }
 
         // ── Acepta con o sin "CON-" ───────────────────────────────────────
         String idBuscado = numero.toUpperCase().startsWith("CON-")
                 ? numero.toUpperCase()
-                : "CON-" + numero;
+                : "CON-" + numero.toUpperCase();
 
         boolean encontrado = false;
         for (ObjAlquiler a : la) {
-            if (a.getIdContrato().equals(idBuscado)) {
+            if (a.getIdContrato().equalsIgnoreCase(idBuscado)) {
                 encontrado = true;
+                System.out.println("\n========================================");
                 System.out.println("ID Contrato:  " + a.getIdContrato());
                 System.out.println("Cliente:      " + a.getCedulaCliente());
                 System.out.println("Placa:        " + a.getPlacaVehiculo());
@@ -176,11 +192,13 @@ public class MetodoAlquiler {
                 System.out.println("Dias:         " + a.getDiasAlquiler());
                 System.out.println("Total:      $ " + a.getTotalPagar());
                 System.out.println("Estado:       " + (a.isEstado() ? "Activo" : "Finalizado"));
+                System.out.println("========================================");
                 break;
             }
         }
-        if (!encontrado)
+        if (!encontrado) {
             System.out.println("Contrato no encontrado.");
+        }
     }
 
     public void InformeGeneral(LinkedList<ObjAlquiler> la, LinkedList<ObjClientes> lc, LinkedList<ObjVehiculos> lv) {
