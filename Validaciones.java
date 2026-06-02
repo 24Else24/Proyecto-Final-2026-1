@@ -429,3 +429,17 @@ public class Validaciones {
                 + dia + a - 1524;
     }
 }
+public int leerOpcionTipo(Scanner sc) {
+    String entrada = sc.nextLine().trim();
+    if (entrada.isEmpty() || entrada.matches("[0-9]+")){
+        System.out.println("Error: Solo se permiten numeros");
+        return leerOpcionTipo(sc);
+    }
+
+    int tipo = Integer.parseInt(entrada);
+    if(tipo!=1 && tipo!=2){
+        System.out.println("Error: ingrese solo 1 (Sedan) o 2(SUV)");
+        return leerOpcionTipo(sc);
+    }
+    return tipo;
+}

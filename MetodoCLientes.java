@@ -29,7 +29,7 @@ public class MetodoCLientes {
 
   public LinkedList<ObjClientes> ModificarCliente(LinkedList<ObjClientes> l) {
     System.out.println("Ingrese la cedula del cliente a modificar: ");
-    String cedula = sc.nextLine().trim();
+    String cedula = va.leerCedula(sc);
     boolean encontrado = false;
 
     for (ObjClientes o : l) {
@@ -59,7 +59,7 @@ public class MetodoCLientes {
 
   public LinkedList<ObjClientes> EliminarCliente(LinkedList<ObjClientes> l) {
     System.out.println("Ingrese la cedula del cliente a eliminar: ");
-    String cedula = sc.nextLine().trim();
+    String cedula = va.leerCedula(sc);
     boolean encontrado = false;
 
     for (ObjClientes o : l) {
@@ -79,8 +79,8 @@ public class MetodoCLientes {
 
   public void BuscarCliente(LinkedList<ObjClientes> l) {
     System.out.println("Ingrese la cedula del cliente a buscar: ");
-    String cedula = sc.nextLine().trim();
-    boolean encontrado = false; // Bandera de control
+    String cedula = va.leerCedula(sc);
+    boolean encontrado = false;
 
     for (ObjClientes o : l) {
       if (o.getCedula().equalsIgnoreCase(cedula)) {

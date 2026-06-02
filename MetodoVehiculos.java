@@ -6,8 +6,6 @@ public class MetodoVehiculos {
     Validaciones va = new Validaciones();
 
     public LinkedList<ObjVehiculos> RegistrarVehiculo(LinkedList<ObjVehiculos> listaVehiculos) {
-        System.out.println("Tipo de vehiculo: 1. Carro Sedan  2. Camioneta SUV");
-        int tipo = va.leerOpcionMenu(sc); // <--- Ahora usa la validación recursiva y segura
         System.out.println("Ingrese la placa: ");
         String placa = va.leerPlaca(sc);
 
@@ -17,6 +15,9 @@ public class MetodoVehiculos {
                 return listaVehiculos;
             }
         }
+        System.out.println("Tipo de vehiculo: 1. Carro Sedan  2. Camioneta SUV");
+        int tipo = va.leerOpcionTipo(sc);
+        
         System.out.println("Ingrese la marca: ");
         String marca = sc.nextLine();
         System.out.println("Ingrese el modelo (año): ");

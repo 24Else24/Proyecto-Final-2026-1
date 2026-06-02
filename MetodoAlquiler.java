@@ -74,12 +74,10 @@ public class MetodoAlquiler {
         boolean encontrado = false;
 
         for (ObjAlquiler a : la) {
-            // Validación ignorando mayúsculas/minúsculas
             if (a.getPlacaVehiculo().equalsIgnoreCase(placa) && a.isEstado()) {
-                a.setEstado(false); // Finaliza el contrato
+                a.setEstado(false);
                 encontrado = true;
 
-                // Cambiar el estado del vehículo de nuevo a disponible (true)
                 for (ObjVehiculos v : lv) {
                     if (v.getPlaca().equalsIgnoreCase(placa)) {
                         v.setEstado(true);
@@ -110,21 +108,21 @@ public class MetodoAlquiler {
                 System.out.println("2. Modificar fecha de fin");
                 System.out.println("3. Modificar ambas fechas");
                 System.out.println("Seleccione una opcion: ");
-                String opcion = sc.nextLine().trim();
+                int opcion = va.leerOpcionMenu(sc);
 
                 String tempInicio = a.getFechaInicio();
                 String tempFin = a.getFechaFin();
 
                 switch (opcion) {
-                    case "1":
+                    case 1:
                         System.out.println("Ingrese la nueva fecha de inicio (DD/MM/AAAA): ");
                         tempInicio = va.leerFecha(sc);
                         break;
-                    case "2":
+                    case 2:
                         System.out.println("Ingrese la nueva fecha de fin (DD/MM/AAAA): ");
                         tempFin = va.leerFecha(sc);
                         break;
-                    case "3":
+                    case 3:
                         System.out.println("Ingrese la nueva fecha de inicio (DD/MM/AAAA): ");
                         tempInicio = va.leerFecha(sc);
                         System.out.println("Ingrese la nueva fecha de fin (DD/MM/AAAA): ");
@@ -174,7 +172,7 @@ public class MetodoAlquiler {
             return;
         }
 
-        // ── Acepta con o sin "CON-" ───────────────────────────────────────
+        // ── Acepta con o sin "CON-"
         String idBuscado = numero.toUpperCase().startsWith("CON-")
                 ? numero.toUpperCase()
                 : "CON-" + numero.toUpperCase();
@@ -207,7 +205,6 @@ public class MetodoAlquiler {
         System.out.println("        INFORME GENERAL DEL NEGOCIO     ");
         System.out.println("========================================");
 
-        // ── 1. CLIENTES ──────────────────────────────────────────────────────
         System.out.println("\n--- CLIENTES REGISTRADOS (" + lc.size() + ") ---");
         if (lc.isEmpty()) {
             System.out.println("No hay clientes registrados.");
@@ -220,7 +217,6 @@ public class MetodoAlquiler {
             }
         }
 
-        // ── 2. VEHICULOS ─────────────────────────────────────────────────────
         System.out.println("\n--- VEHICULOS REGISTRADOS (" + lv.size() + ") ---");
         if (lv.isEmpty()) {
             System.out.println("No hay vehiculos registrados.");
@@ -235,7 +231,6 @@ public class MetodoAlquiler {
             }
         }
 
-        // ── 3. CONTRATOS ACTIVOS ─────────────────────────────────────────────
         int activos = 0;
         float ingresoActivos = 0;
         System.out.println("\n--- CONTRATOS ACTIVOS ---");
@@ -255,7 +250,6 @@ public class MetodoAlquiler {
         if (activos == 0)
             System.out.println("No hay contratos activos.");
 
-        // ── 4. CONTRATOS FINALIZADOS ─────────────────────────────────────────
         int finalizados = 0;
         float ingresoFinalizados = 0;
         System.out.println("\n--- CONTRATOS FINALIZADOS ---");
@@ -275,7 +269,6 @@ public class MetodoAlquiler {
         if (finalizados == 0)
             System.out.println("No hay contratos finalizados.");
 
-        // ── 5. RESUMEN FINANCIERO ─────────────────────────────────────────────
         float ingresoTotal = ingresoActivos + ingresoFinalizados;
         System.out.println("\n========================================");
         System.out.println("           RESUMEN FINANCIERO           ");
