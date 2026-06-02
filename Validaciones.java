@@ -342,7 +342,7 @@ public class Validaciones {
             if (fecha.isEmpty()) {
                 System.out.println("Error: la fecha no puede estar vacia.");
             } else if (!fecha.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                System.out.println("Error: formato invalido. Use DD/MM/AAAA (Ej: 25/01/2024).");
+                System.out.println("Error: formato invalido. Use DD/MM/AAAA (Ej: 25/01/2025).");
             } else {
                 String[] partes = fecha.split("/");
                 int dia = Integer.parseInt(partes[0]);
