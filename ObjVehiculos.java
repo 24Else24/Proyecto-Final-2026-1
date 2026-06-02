@@ -3,12 +3,12 @@ public class ObjVehiculos{
     private String marca;
     private int modelo;
     private float precioDiario;
-    private String estado; // disponible / alquilado
+    private Boolean estado; // disponible | alquilado
 
     public ObjVehiculos() {
     }
 
-    public ObjVehiculos(String placa, String marca, int modelo, float precioDiario, String estado) {
+    public ObjVehiculos(String placa, String marca, int modelo, float precioDiario, Boolean estado) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
@@ -48,11 +48,11 @@ public class ObjVehiculos{
         this.precioDiario = precioDiario;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 }

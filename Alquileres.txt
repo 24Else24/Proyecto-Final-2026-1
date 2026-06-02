@@ -1,0 +1,9 @@
+IdContrato: CON-1780362319951
+Cedula: 1011512001
+Placa: DRX120
+FechaInicio: 20/02/2025
+FechaFin: 22/02/2025
+Dias: 2
+TotalPagar: 50.0
+Estado: 1
+------------------------------------------------------

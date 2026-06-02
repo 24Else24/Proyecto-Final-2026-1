@@ -6,7 +6,7 @@ public class ObjCarroSedan extends ObjVehiculos{
     public ObjCarroSedan() {
     }
 
-    public ObjCarroSedan(String placa, String marca, int modelo, float precioDiario, String estado,
+    public ObjCarroSedan(String placa, String marca, int modelo, float precioDiario, Boolean estado,
             String tipoCombustible, String transmision) {
         super(placa, marca, modelo, precioDiario, estado);
         this.tipoCombustible = tipoCombustible;
