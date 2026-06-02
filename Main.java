@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean seguir = true;
+        Validaciones va = new Validaciones();
         Scanner sc = new Scanner(System.in);
 
         // ── Listas globales cargadas una sola vez al iniciar ──────────────
@@ -23,7 +24,7 @@ public class Main {
             System.out.println("4. Informe general");
             System.out.println("5. Salir");
             System.out.println("Ingrese una opcion: ");
-            switch (sc.nextInt()) {
+            switch (va.leerOpcionMenu(sc)) {
                 case 1:
                     Clientes c = new Clientes();
                     c.MenuClientes(lc);

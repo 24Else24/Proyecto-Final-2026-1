@@ -5,6 +5,7 @@ public class Alquileres {
     public void MenuAlquileres(LinkedList<ObjAlquiler> la, LinkedList<ObjClientes> lc, LinkedList<ObjVehiculos> lv) {
         MetodoAlquiler m = new MetodoAlquiler();
         Scanner sc = new Scanner(System.in);
+        Validaciones va = new Validaciones();
         boolean menu = true;
         while (menu) {
             System.out.println("=== GESTION DE ALQUILERES ===");
@@ -14,7 +15,7 @@ public class Alquileres {
             System.out.println("4. Buscar contrato");
             System.out.println("5. Volver al menu principal");
             System.out.println("Ingrese una opcion: ");
-            switch (sc.nextInt()) {
+            switch (va.leerOpcionMenu(sc)) {
                 case 1: la = m.RegistrarAlquiler(la, lc, lv); break;
                 case 2: la = m.ModificarAlquiler(la, lv);     break;
                 case 3: la = m.DevolverAlquiler(la, lv);      break;

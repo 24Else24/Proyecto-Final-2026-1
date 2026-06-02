@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Vehiculos {
     public void MenuVehiculos(LinkedList<ObjVehiculos> l) {
         MetodoVehiculos m = new MetodoVehiculos();
+        Validaciones va = new Validaciones();
         Scanner sc = new Scanner(System.in);
         boolean menu = true;
         while (menu) {
@@ -14,7 +15,7 @@ public class Vehiculos {
             System.out.println("4. Buscar vehiculo");
             System.out.println("5. Volver al menu principal");
             System.out.println("Ingrese una opcion: ");
-            switch (sc.nextInt()) {
+            switch (va.leerOpcionMenu(sc)) {
                 case 1: l = m.RegistrarVehiculo(l);  break;
                 case 2: l = m.ModificarVehiculo(l);  break;
                 case 3: l = m.EliminarVehiculo(l);   break;

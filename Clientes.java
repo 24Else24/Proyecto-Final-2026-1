@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Clientes {
     public void MenuClientes(LinkedList<ObjClientes> l) {
         MetodoCLientes m = new MetodoCLientes();
+        Validaciones va = new Validaciones();
         Scanner sc = new Scanner(System.in);
         boolean menu = true;
         while (menu) {
@@ -14,7 +15,7 @@ public class Clientes {
             System.out.println("4. Buscar cliente");
             System.out.println("5. Volver al menu principal");
             System.out.println("Ingrese una opcion: ");
-            switch (sc.nextInt()) {
+            switch (va.leerOpcionMenu(sc)) {
                 case 1: l = m.AgregarCliente(l);  break;
                 case 2: l = m.ModificarCliente(l); break;
                 case 3: l = m.EliminarCliente(l);  break;
