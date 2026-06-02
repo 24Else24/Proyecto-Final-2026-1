@@ -1,0 +1,9 @@
+Tipo: CarroSedan
+Placa: DRX120
+Marca: Chevrolet
+Modelo: 2015
+PrecioDiario: 25.0
+Estado: false
+TipoCombustible: gasolina
+Transmision: automatica
+------------------------------------------------------

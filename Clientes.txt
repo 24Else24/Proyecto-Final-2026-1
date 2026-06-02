@@ -1,0 +1,7 @@
+Cedula: 1011512001
+Nombre: Simon
+Apellido: Alvarez
+telefono: 3043707281
+Direccion: Calle 48d 102b 102
+Licencia de conduccion: 12345678
+------------------------------------------------------ 
