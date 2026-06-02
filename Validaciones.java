@@ -2,77 +2,51 @@ import java.util.Scanner;
 
 public class Validaciones {
     public boolean leerBooleano(Scanner sc) {
-        int valor = -1;
-        while (valor != 0 && valor != 1) {
-            System.out.println("Ingrese un valor booleano (1 = true / 0 = false): ");
-            if (sc.hasNextInt()) {
-                valor = sc.nextInt();
-                if (valor != 0 && valor != 1)
-                    System.out.println("Valor invalido, ingrese solo 1 o 0.");
-            } else {
-                System.out.println("Valor invalido, ingrese solo 1 o 0.");
-                sc.next();
+        if (sc.hasNextInt()) {
+            int valor = sc.nextInt();
+            if (valor == 0 || valor == 1) {
+                return valor == 1; // Caso base válido
             }
+        } else {
+            sc.next(); // Descarta la entrada inválida de texto
         }
-        return valor == 1;
+        System.out.println("Valor invalido, ingrese solo 1 o 0.");
+        return leerBooleano(sc); // Llamada recursiva
     }
 
     public String leerNombre(Scanner sc) {
-        String nombre = "";
-        boolean valido = false;
+        String nombre = sc.nextLine().trim();
 
-        while (!valido) {
-            nombre = sc.nextLine().trim();
-
-            if (nombre.isEmpty()) {
-                System.out.println("Error: el campo no puede estar vacio.");
-            } else if (nombre.length() < 2) {
-                System.out.println("Error: el nombre debe tener al menos 2 caracteres.");
-            } else if (nombre.length() > 50) {
-                System.out.println("Error: el nombre no puede superar los 50 caracteres.");
-            } else if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+")) {
-                System.out.println("Error: el nombre solo puede contener letras y espacios.");
-            } else if (nombre.matches(".*\\s{2,}.*")) {
-                System.out.println("Error: el nombre no puede tener espacios dobles.");
-            } else {
-                valido = true;
-            }
+        if (nombre.isEmpty()) {
+            System.out.println("Error: el campo no puede estar vacio.");
+            return leerNombre(sc); // Llamada recursiva
+        }
+        if (nombre.length() < 2 || nombre.length() > 50) {
+            System.out.println("Error: debe tener entre 2 y 50 caracteres.");
+            return leerNombre(sc); // Llamada recursiva
+        }
+        if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+")) {
+            System.out.println("Error: use solo letras.");
+            return leerNombre(sc); // Llamada recursiva
         }
 
-        String[] palabras = nombre.split(" ");
-        StringBuilder resultado = new StringBuilder();
-        for (String p : palabras) {
-            resultado.append(Character.toUpperCase(p.charAt(0)))
-                    .append(p.substring(1).toLowerCase())
-                    .append(" ");
-        }
-
-        return resultado.toString().trim();
+        return nombre; // Caso base válido
     }
 
     public String leerCedula(Scanner sc) {
-        String cedula = "";
-        boolean valido = false;
+        String cedula = sc.nextLine().trim();
 
-        while (!valido) {
-            System.out.println("Ingrese la cedula: ");
-            cedula = sc.nextLine().trim();
-
-            if (cedula.isEmpty()) {
-                System.out.println("Error: la cedula no puede estar vacia.");
-            } else if (!cedula.matches("[0-9]+")) {
-                System.out.println("Error: la cedula solo puede contener numeros.");
-            } else if (cedula.length() < 6) {
-                System.out.println("Error: la cedula debe tener al menos 6 digitos.");
-            } else if (cedula.length() > 10) {
-                System.out.println("Error: la cedula no puede superar los 10 digitos.");
-            } else if (cedula.matches("0+")) {
-                System.out.println("Error: la cedula no puede ser todos ceros.");
-            } else if (cedula.charAt(0) == '0') {
-                System.out.println("Error: la cedula no puede empezar con cero.");
-            } else {
-                valido = true;
-            }
+        if (cedula.isEmpty()) {
+            System.out.println("Error: la cedula no puede estar vacia.");
+            return leerCedula(sc);
+        }
+        if (!cedula.matches("[0-9]+")) {
+            System.out.println("Error: la cedula debe contener solo numeros.");
+            return leerCedula(sc);
+        }
+        if (cedula.length() < 6 || cedula.length() > 12) {
+            System.out.println("Error: longitud de cedula invalida (6-12 digitos).");
+            return leerCedula(sc);
         }
 
         return cedula;
@@ -161,22 +135,16 @@ public class Validaciones {
     }
 
     public String leerPlaca(Scanner sc) {
-        String placa = "";
-        boolean valido = false;
+        String placa = sc.nextLine().trim().toUpperCase();
 
-        while (!valido) {
-            System.out.println("Ingrese la placa (Ej: ABC123): ");
-            placa = sc.nextLine().trim().toUpperCase();
-
-            if (placa.isEmpty()) {
-                System.out.println("Error: la placa no puede estar vacia.");
-            } else if (placa.length() != 6) {
-                System.out.println("Error: la placa debe tener exactamente 6 caracteres.");
-            } else if (!placa.matches("[A-Z]{3}[0-9]{3}")) {
-                System.out.println("Error: formato invalido. Use 3 letras seguidas de 3 numeros (Ej: ABC123).");
-            } else {
-                valido = true;
-            }
+        if (placa.isEmpty()) {
+            System.out.println("Error: la placa no puede estar vacia.");
+            return leerPlaca(sc);
+        }
+        // Valida formato estándar de placas (letras y números sin caracteres raros)
+        if (!placa.matches("[A-Z0-9]+")) {
+            System.out.println("Error: la placa solo puede contener letras y numeros.");
+            return leerPlaca(sc);
         }
 
         return placa;
@@ -208,6 +176,23 @@ public class Validaciones {
 
         return anio;
     }
+
+    public int leerOpcionMenu(Scanner sc) {
+    try {
+        if (sc.hasNextInt()) {
+            int opcion = sc.nextInt();
+            sc.nextLine();
+            return opcion;
+        } else {
+            System.out.println("Error: Debe ingresar un numero entero.");
+            sc.next();
+            return leerOpcionMenu(sc);
+        }
+    } catch (Exception e) {
+        System.out.println("Error en la entrada. Intente nuevamente.");
+        return leerOpcionMenu(sc);
+    }
+}
 
     public String leerTraccion(Scanner sc) {
         String traccion = "";
@@ -247,7 +232,6 @@ public class Validaciones {
         boolean valido = false;
 
         while (!valido) {
-            System.out.println("Ingrese el tipo de combustible (1. Gasolina  2. Diesel  3. Electrico): ");
             String entrada = sc.nextLine().trim();
 
             switch (entrada) {
@@ -279,7 +263,6 @@ public class Validaciones {
         boolean valido = false;
 
         while (!valido) {
-            System.out.println("Ingrese la transmision (1. Automatica  2. Manual): ");
             String entrada = sc.nextLine().trim();
 
             switch (entrada) {
@@ -370,8 +353,8 @@ public class Validaciones {
                     System.out.println("Error: el mes debe estar entre 01 y 12.");
                 } else if (dia < 1 || dia > diasDelMes(dia, mes, anio)) {
                     System.out.println("Error: el dia no es valido para el mes ingresado.");
-                } else if (anio < 1900 || anio > 2025) {
-                    System.out.println("Error: el año debe estar entre 1900 y 2025.");
+                } else if (anio < 1900 || anio > 2026) {
+                    System.out.println("Error: el año debe estar entre 1900 y 2026.");
                 } else {
                     valido = true;
                 }

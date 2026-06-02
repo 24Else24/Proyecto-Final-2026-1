@@ -2,8 +2,17 @@ Tipo: CarroSedan
 Placa: DRX120
 Marca: Chevrolet
 Modelo: 2015
-PrecioDiario: 25.0
-Estado: false
-TipoCombustible: gasolina
-Transmision: automatica
+PrecioDiario: 150000.0
+Estado: 1
+TipoCombustible: 1
+Transmision: 1
+------------------------------------------------------
+Tipo: CarroSedan
+Placa: ABC123
+Marca: renault
+Modelo: 2015
+PrecioDiario: 150000.0
+Estado: 1
+TipoCombustible: 1
+Transmision: 1
 ------------------------------------------------------

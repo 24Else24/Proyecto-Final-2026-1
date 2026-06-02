@@ -5,3 +5,10 @@ telefono: 3043707281
 Direccion: Calle 48d 102b 102
 Licencia de conduccion: 12345678
 ------------------------------------------------------ 
+Cedula: 1011512002
+Nombre: Juan
+Apellido: Juan
+telefono: 3124567890
+Direccion: calle 48d 102b 102
+Licencia de conduccion: 12345678
+------------------------------------------------------ 
